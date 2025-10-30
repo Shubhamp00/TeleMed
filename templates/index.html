@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeleHealth - Teleconsultation Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-heart-pulse-fill me-2" viewBox="0 0 16 16">
+                    <path d="M1.475 9C2.702 10.84 4.779 12.871 8 15c3.221-2.129 5.298-4.16 6.525-6H12a.5.5 0 0 1-.464-.314l-1.457-3.642-1.598 4.793a.5.5 0 0 1-.948 0L6.788 6.5 6.05 9H1.475z"/>
+                    <path d="M.88 8C-2.427 1.68 4.41-2 7.823 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C11.59-2 18.426 1.68 15.12 8h-2.783l-1.874-4.686a.5.5 0 0 0-.948 0L7.788 8.5l-.747-2.246a.5.5 0 0 0-.948 0L5.054 8H.88z"/>
+                </svg>
+                TeleHealth
+            </a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12 text-center mb-5">
+                <h1 class="display-4 mb-3">Welcome to TeleHealth</h1>
+                <p class="lead text-muted">AI-Powered Teleconsultation Platform with Real-Time Video, Computer Vision Analysis, and Speech-to-Text</p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100 border-0">
+                    <div class="card-body text-center p-5">
+                        <div class="mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#0d6efd" class="bi bi-person-badge" viewBox="0 0 16 16">
+                                <path d="M6.5 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path d="M4.5 0A2.5 2.5 0 0 0 2 2.5V14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2.5A2.5 2.5 0 0 0 11.5 0h-7zM3 2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v10.795a4.2 4.2 0 0 0-.776-.492C11.392 12.387 10.063 12 8 12s-3.392.387-4.224.803a4.2 4.2 0 0 0-.776.492V2.5z"/>
+                            </svg>
+                        </div>
+                        <h3 class="card-title mb-3">Doctor Portal</h3>
+                        <p class="card-text text-muted mb-4">Access patient consultations with AI-assisted analysis and automated transcription</p>
+                        <a href="/doctor" class="btn btn-primary btn-lg">Enter as Doctor</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100 border-0">
+                    <div class="card-body text-center p-5">
+                        <div class="mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#198754" class="bi bi-person-hearts" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M11.5 1.246c.832-.855 2.913.642 0 2.566-2.913-1.924-.832-3.421 0-2.566ZM9 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h10s1 0 1-1-1-4-6-4-6 3-6 4Zm13.5-8.09c1.387-1.425 4.855 1.07 0 4.277-4.854-3.207-1.387-5.702 0-4.276Z"/>
+                                <path fill-rule="evenodd" d="M15 2.165c.555-.57 1.942.428 0 1.711-1.942-1.283-.555-2.281 0-1.71Z"/>
+                            </svg>
+                        </div>
+                        <h3 class="card-title mb-3">Patient Portal</h3>
+                        <p class="card-text text-muted mb-4">Connect with your doctor for remote consultations and health monitoring</p>
+                        <a href="/patient" class="btn btn-success btn-lg">Enter as Patient</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4">
+                        <h4 class="mb-4">Platform Features</h4>
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#0d6efd" class="bi bi-camera-video" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2V5z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h6>Real-Time Video Calling</h6>
+                                        <p class="text-muted small">WebRTC-based peer-to-peer video and audio streaming</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#198754" class="bi bi-eye" viewBox="0 0 16 16">
+                                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h6>Computer Vision Analysis</h6>
+                                        <p class="text-muted small">Facial expression, posture, and visual health indicator detection</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#dc3545" class="bi bi-mic" viewBox="0 0 16 16">
+                                            <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/>
+                                            <path d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0v5zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h6>Speech-to-Text</h6>
+                                        <p class="text-muted small">Real-time transcription using Faster Whisper AI</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="mt-5 py-4 bg-light">
+        <div class="container text-center text-muted">
+            <p class="mb-0">&copy; 2025 TeleHealth Platform. AI-Powered Medical Consultations.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
