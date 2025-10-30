@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Portal - TeleHealth</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">TeleHealth - Doctor Portal</a>
+            <a href="/" class="btn btn-outline-light btn-sm">Back to Home</a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <div class="card shadow-sm">
+                    <div class="card-body p-5">
+                        <div class="text-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#0d6efd" class="bi bi-person-badge mb-3" viewBox="0 0 16 16">
+                                <path d="M6.5 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path d="M4.5 0A2.5 2.5 0 0 0 2 2.5V14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2.5A2.5 2.5 0 0 0 11.5 0h-7zM3 2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v10.795a4.2 4.2 0 0 0-.776-.492C11.392 12.387 10.063 12 8 12s-3.392.387-4.224.803a4.2 4.2 0 0 0-.776.492V2.5z"/>
+                            </svg>
+                            <h2>Doctor Portal</h2>
+                            <p class="text-muted">Start or join a consultation session</p>
+                        </div>
+
+                        <div class="mb-4">
+                            <h5 class="mb-3">Create New Session</h5>
+                            <button class="btn btn-primary btn-lg w-100" id="createSessionBtn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle me-2" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                </svg>
+                                Create New Consultation
+                            </button>
+                        </div>
+
+                        <hr>
+
+                        <div class="mb-4">
+                            <h5 class="mb-3">Join Existing Session</h5>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="sessionIdInput" placeholder="Enter Session ID">
+                                <button class="btn btn-outline-primary" id="joinSessionBtn">Join Session</button>
+                            </div>
+                        </div>
+
+                        <div id="sessionInfo" class="alert alert-info d-none">
+                            <h6>Session Created</h6>
+                            <p class="mb-2">Session ID: <strong id="displaySessionId"></strong></p>
+                            <p class="mb-0 small">Share this ID with your patient to join the consultation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function generateSessionId() {
+            return 'session_' + Math.random().toString(36).substring(2, 15);
+        }
+
+        document.getElementById('createSessionBtn').addEventListener('click', function() {
+            const sessionId = generateSessionId();
+            document.getElementById('displaySessionId').textContent = sessionId;
+            document.getElementById('sessionInfo').classList.remove('d-none');
+            
+            setTimeout(() => {
+                window.location.href = `/consultation/${sessionId}?role=doctor`;
+            }, 2000);
+        });
+
+        document.getElementById('joinSessionBtn').addEventListener('click', function() {
+            const sessionId = document.getElementById('sessionIdInput').value.trim();
+            if (sessionId) {
+                window.location.href = `/consultation/${sessionId}?role=doctor`;
+            } else {
+                alert('Please enter a valid Session ID');
+            }
+        });
+    </script>
+</body>
+</html>
