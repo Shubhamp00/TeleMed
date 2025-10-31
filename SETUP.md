@@ -108,7 +108,47 @@ Faster Whisper model loaded successfully
  * Running on http://0.0.0.0:5000
 ```
 
-**Note:** The first time you run the application, it will download the Faster Whisper model (~145MB). This is a one-time download.
+**Important Notes:**
+- The first time you run, it will download the Faster Whisper model (~145MB). This is a one-time download.
+- **If you see a network timeout error**, don't worry! The app will still work without transcription. See the "Network Issues" section below.
+
+**Possible Outputs:**
+
+✅ **Full Success:**
+```
+✓ Faster Whisper model loaded successfully!
+ * Running on http://0.0.0.0:5000
+```
+All features work including transcription.
+
+⚠️ **Partial Success (Network Issue):**
+```
+⚠ Network Error: Unable to download Whisper model
+   Transcription feature will be DISABLED.
+   The app will continue to work without speech-to-text.
+ * Running on http://0.0.0.0:5000
+```
+Video calling and CV analysis work, but transcription is disabled. **This is fine for testing!**
+
+---
+
+### 🔴 Network Issues? (Common on First Run)
+
+If you see `TimeoutError` or `ConnectionError` when starting:
+
+**Quick Fix - Run Without Transcription:**
+The app is designed to work even if the Whisper model can't download. Just let it start anyway! You'll still have:
+- ✅ Video calling
+- ✅ Computer Vision analysis  
+- ❌ Speech-to-text (disabled)
+
+**Full Fix - Get Transcription Working:**
+1. Check your internet connection
+2. Temporarily disable VPN/Proxy
+3. Allow Python through firewall
+4. Try again with stable internet
+
+For detailed solutions, see **TROUBLESHOOTING.md**
 
 ---
 
