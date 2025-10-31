@@ -5,15 +5,62 @@ import wave
 import numpy as np
 import tempfile
 import os
+import sys
 
 class WhisperTranscriber:
     def __init__(self, model_size="base"):
-        print(f"Loading Faster Whisper model: {model_size}")
+        print(f"Attempting to load Faster Whisper model: {model_size}")
+        print("Note: First-time setup will download ~145MB model from HuggingFace")
+        print("This may take a few minutes depending on your internet connection...")
+        
+        self.model = None
+        self.model_available = False
+        
         try:
-            self.model = WhisperModel(model_size, device="cpu", compute_type="int8")
-            print("Faster Whisper model loaded successfully")
+            import socket
+            original_timeout = socket.getdefaulttimeout()
+            socket.setdefaulttimeout(60)
+            
+            self.model = WhisperModel(
+                model_size, 
+                device="cpu", 
+                compute_type="int8",
+                download_root=None,
+                local_files_only=False
+            )
+            
+            socket.setdefaulttimeout(original_timeout)
+            
+            self.model_available = True
+            print("✓ Faster Whisper model loaded successfully!")
+            
+        except ConnectionError as e:
+            print(f"\n⚠ Network Error: Unable to download Whisper model")
+            print(f"   Reason: {str(e)[:100]}")
+            print(f"\n   Transcription feature will be DISABLED.")
+            print(f"   The app will continue to work without speech-to-text.\n")
+            self.model = None
+            
+        except TimeoutError as e:
+            print(f"\n⚠ Timeout Error: Model download took too long")
+            print(f"   Your internet connection may be slow or blocked.")
+            print(f"\n   Transcription feature will be DISABLED.")
+            print(f"   The app will continue to work without speech-to-text.\n")
+            self.model = None
+            
         except Exception as e:
-            print(f"Error loading Whisper model: {e}")
+            error_msg = str(e)
+            print(f"\n⚠ Error loading Whisper model: {error_msg[:200]}")
+            
+            if "timeout" in error_msg.lower() or "connection" in error_msg.lower():
+                print(f"\n   SOLUTION:")
+                print(f"   1. Check your internet connection")
+                print(f"   2. Disable VPN/Proxy if enabled")
+                print(f"   3. Check firewall settings")
+                print(f"   4. Try again when you have stable internet\n")
+            
+            print(f"   Transcription feature will be DISABLED.")
+            print(f"   The app will continue to work with CV analysis only.\n")
             self.model = None
     
     def decode_audio(self, audio_data):
@@ -29,8 +76,8 @@ class WhisperTranscriber:
             return None
     
     def transcribe_audio(self, audio_data):
-        if self.model is None:
-            return "Whisper model not available"
+        if self.model is None or not self.model_available:
+            return "[Transcription unavailable - Model not loaded]"
         
         try:
             audio_bytes = self.decode_audio(audio_data)
